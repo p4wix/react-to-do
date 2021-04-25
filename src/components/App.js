@@ -29,7 +29,7 @@ class App extends Component {
 					text: "zdac studia",
 					date: "2023-04-23",
 					importat: true,
-					active: true,
+					active: false,
 					finishDate: null
 				},
 				{
@@ -70,6 +70,18 @@ class App extends Component {
 
 	changeTaskStatus = id => {
 		console.log("change id " + id);
+		const tasks = [...this.state.tasks];
+
+		tasks.forEach(task => {
+			if (task.id === id) {
+				task.active = false;
+				task.finishDate = new Date().getTime();
+			}
+		});
+
+		this.setState({
+			tasks: tasks
+		});
 	};
 
 	render() {
