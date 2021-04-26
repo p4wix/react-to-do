@@ -25,18 +25,28 @@ const TaskList = props => {
 			change={props.change}
 		/>
 	));
+	console.log(activeTasks.length);
 	return (
 		<>
 			<div className="active">
 				<h1>Zadania do zrobienia</h1>
-				{activeTasks}
+				{activeTasks.length > 0 ? (
+					activeTasks
+				) : (
+					<p>Brak zadań pomyśl co mozesz zrobić</p>
+				)}
 			</div>
 
 			<hr />
 
 			<div className="done">
-				<h3>Zadania zrobione (0)</h3>
-				{doneTasks}
+				<h3>
+					Zadania zrobione <em>({done.length})</em>
+				</h3>
+				{done.length > 5 && (
+					<span>Wyświetlonych jest jedynie 5 ostatnich elementów</span>
+				)}
+				{doneTasks.slice(0, 5)}
 			</div>
 		</>
 	);

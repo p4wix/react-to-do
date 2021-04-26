@@ -12,15 +12,15 @@ class App extends Component {
 					id: 0,
 					text: "zagrać w gre",
 					date: "2021-05-20",
-					importat: true,
+					important: true,
 					active: true,
-					finishDate: null
+					finishDate: true
 				},
 				{
 					id: 1,
 					text: "posprzatac",
 					date: "2022-09-10",
-					importat: false,
+					important: false,
 					active: true,
 					finishDate: null
 				},
@@ -28,29 +28,31 @@ class App extends Component {
 					id: 3,
 					text: "zdac studia",
 					date: "2023-04-23",
-					importat: true,
-					active: false,
+					important: true,
+					active: true,
 					finishDate: null
 				},
 				{
 					id: 4,
-					text: "task1",
+					text: "wynieść śmieci",
 					date: "2023-04-23",
-					importat: true,
+					important: false,
 					active: true,
 					finishDate: null
 				},
 				{
 					id: 5,
-					text: "task5",
+					text: "pograć w piłkę",
 					date: "2023-04-23",
-					importat: true,
+					important: false,
 					active: true,
 					finishDate: null
 				}
 			]
 		};
 	}
+
+	counter = 9;
 
 	// Usuwanie obiektow z tablicy ze state
 	deleteTask = id => {
@@ -84,11 +86,32 @@ class App extends Component {
 		});
 	};
 
+	addTask = (text, date, important) => {
+		console.log("dodany obiekt");
+
+		const task = {
+			id: this.counter,
+			text: text, // tekst z inputa
+			date: date, // text z date inputa
+			important: important, // wartosc z checkboxa
+			active: true,
+			finishDate: true
+		};
+
+		++this.counter;
+
+		this.setState(prevState => ({
+			tasks: [...prevState.tasks, task]
+		}));
+
+		return true;
+	};
+
 	render() {
 		return (
 			<div className="App">
-				To do
-				<AddTask />
+				<h1>Todo App</h1>
+				<AddTask addTask={this.addTask} />
 				<TaskList
 					tasks={this.state.tasks}
 					delete={this.deleteTask}
